@@ -36,6 +36,38 @@ for i, rectangle in enumerate(rectangles):
         <div id='rectangle-{i}' class='rectangle' style='left: {rectangle["x"]}px; top: {rectangle["y"]}px;'></div>
     """, unsafe_allow_html=True)
 
-    components.dnd(
-        f"rectangle-{i}", move_rectangle, delete_func=delete_rectangle, args=(i,)
-    )
+st.markdown('</div>', unsafe_allow_html=True)
+
+# Add the draggable functionality
+st.write("""
+<script>
+  function dragStart(event) {
+    event.dataTransfer.setData("text", event.target.id);
+  }
+  
+  function allowDrop(event) {
+    event.preventDefault();
+  }
+  
+  function drop(event) {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("text");
+    event.target.appendChild(document.getElementById(data));
+  }
+</script>
+""", unsafe_allow_html=True)
+
+st.write(
+    """
+<script>
+  var rectangles = document.getElementsByClassName("rectangle");
+  for (var i = 0; i < rectangles.length; i++) {
+    rectangles[i].setAttribute("draggable", "true");
+    rectangles[i].setAttribute("ondragstart", "dragStart(event)");
+    rectangles[i].setAttribute("ondrop", "drop(event)");
+    rectangles[i].setAttribute("ondragover", "allowDrop(event)");
+  }
+</script>
+""",
+    unsafe_allow_html=True,
+)
