@@ -23,8 +23,8 @@ def delete_rectangle(i):
     rectangles.pop(i)
 canvas_width = 600
 canvas_height = 400
-
-st.set_html("""
+st.empty()
+st.write("""
     <div id='canvas' style='position: relative; width: 600px; height: 400px; background-color: #ddd;'></div>
 """)
 
@@ -32,7 +32,7 @@ if st.button("Add Rectangle"):
     create_rectangle(0, 0)
 
 for i, rectangle in enumerate(rectangles):
-    st.set_html(f"""
+    st.write(f"""
         <div id='rectangle-{i}' class='rectangle' style='left: {rectangle["x"]}px
     px; top: {rectangle["y"]}px;'></div>
     """, unsafe_allow_html=True)
