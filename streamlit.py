@@ -24,7 +24,7 @@ def delete_rectangle(i):
 canvas_width = 600
 canvas_height = 400
 st.empty()
-st.write(f"""
+st.markdown("""
     <div id='canvas' style='position: relative; width: 600px; height: 400px; background-color: #ddd;'></div>
 """)
 
