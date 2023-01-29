@@ -1,7 +1,17 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-st.include_css("styles.css")
+st.markdown('''
+    <style>
+    .rectangle {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+    </style>
+''', unsafe_allow_html=True)
+
 
 rectangles = []
 def create_rectangle(x, y):
