@@ -24,9 +24,9 @@ def delete_rectangle(i):
 canvas_width = 600
 canvas_height = 400
 st.empty()
-st.markdown("""
+st.markdown('''
     <div id='canvas' style='position: relative; width: 600px; height: 400px; background-color: #ddd;'></div>
-""")
+''', unsafe_allow_html = True)
 
 if st.button("Add Rectangle"):
     create_rectangle(0, 0)
