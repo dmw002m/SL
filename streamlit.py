@@ -1,5 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
+st.include_css("styles.css")
 
 rectangles = []
 def create_rectangle(x, y):
@@ -11,14 +12,6 @@ def delete_rectangle(i):
     rectangles.pop(i)
 canvas_width = 600
 canvas_height = 400
-st.set_css("""
-    .rectangle {
-        position: absolute;
-        width: 100px;
-        height: 100px;
-        background-color: red;
-    }
-""")
 
 st.set_html("""
     <div id='canvas' style='position: relative; width: 600px; height: 400px; background-color: #ddd;'></div>
