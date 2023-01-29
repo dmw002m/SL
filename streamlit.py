@@ -57,17 +57,28 @@ st.write("""
 </script>
 """, unsafe_allow_html=True)
 
-st.write(
-    """
+st.write("""
 <script>
-  var rectangles = document.getElementsByClassName("rectangle");
-  for (var i = 0; i < rectangles.length; i++) {
-    rectangles[i].setAttribute("draggable", "true");
-    rectangles[i].setAttribute("ondragstart", "dragStart(event)");
-    rectangles[i].setAttribute("ondrop", "drop(event)");
-    rectangles[i].setAttribute("ondragover", "allowDrop(event)");
+  function drag(event) {
+    event.dataTransfer.setData("text", event.target.id);
+    event.dataTransfer.setData("x", event.clientX);
+    event.dataTransfer.setData("y", event.clientY);
   }
+  
+  function drop(event) {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("text");
+    var rect = document.getElementById(data);
+    var x = event.clientX - event.dataTransfer.getData("x") + parseInt(rect.style.left);
+    var y = event.clientY - event.dataTransfer.getData("y") + parseInt(rect.style.top);
+    rect.style.left = x + "px";
+    rect.style.top = y + "px";
+  }
+  
+  var canvas = document.getElementById("canvas");
+  canvas.addEventListener("drop", drop);
+  canvas.addEventListener("dragover", function(event) {
+    event.preventDefault();
+  });
 </script>
-""",
-    unsafe_allow_html=True,
-)
+''', unsafe_allow_html=True)
